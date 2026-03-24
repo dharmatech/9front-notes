@@ -52,6 +52,7 @@ $newPath = "$oldPath;C:\Program Files\qemu\"
 
 - QEMU boot PowerShell script
     - This will set QEMU up so that you can drawterm into your 9front system
+    - I'm forwarding a lot of ports here. 😅 I kept adding ports until it worked. We probably don't need to forward this many though.
     
     `boot-drawterm.ps1`
     
