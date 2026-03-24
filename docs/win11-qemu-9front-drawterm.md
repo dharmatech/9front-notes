@@ -3,7 +3,7 @@
 
 `winget install -e --id SoftwareFreedomConservancy.QEMU`
 
-In a PowerShell window, run the following up update `Path` :
+In a PowerShell window, run the following to update `Path` :
 
 ```
 $oldPath = [Environment]::GetEnvironmentVariable("Path", "User")
