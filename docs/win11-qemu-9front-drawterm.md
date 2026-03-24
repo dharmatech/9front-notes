@@ -100,6 +100,7 @@ $newPath = "$oldPath;C:\Program Files\qemu\"
     - Run this each time after boot
     - Instructions came from here:
         - https://bsandro.tech/posts/9front-on-qemu-with-drawterm-on-linux/
+    - The commented lines are from an older tutorial.
     
     ```
     #!/bin/rc
