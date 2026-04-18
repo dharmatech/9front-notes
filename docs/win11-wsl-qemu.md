@@ -96,3 +96,19 @@
 - Connect with drawterm
     - `.\drawterm-amd64.exe -h 127.0.0.1 -a 127.0.0.1 -u glenda`
 
+
+# Mounting a Plan 9 directory on Ubuntu
+
+Use `exportfs` to export `/usr/glenda`.\
+Run this on Plan 9:
+
+```
+aux/listen1 -t tcp!*!17020 /bin/exportfs -r /usr/glenda
+```
+
+On Linux:
+
+```
+mkdir -p /tmp/9front-glenda
+/home/dharmatech/src/plan9port/bin/9pfuse 'tcp!127.0.0.1!17020' /tmp/9front-glenda
+```
