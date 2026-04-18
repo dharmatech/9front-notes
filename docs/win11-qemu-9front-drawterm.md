@@ -1,9 +1,17 @@
 
+Notes on getting 9front setup in QEMU on Windows 11.
+
+Getting 9front installed in QEMU on Linux is pretty straightforward.  
+The FQA has clear instructions on this.
+
+What wasn't so obvious was what to do if you want to drawterm into the resulting system.  
+The directions below go into this.
+
 # Install QEMU
 
 `winget install -e --id SoftwareFreedomConservancy.QEMU`
 
-In a PowerShell window, run the following up update `Path` :
+In a PowerShell window, run the following to update `Path` :
 
 ```
 $oldPath = [Environment]::GetEnvironmentVariable("Path", "User")
@@ -44,6 +52,7 @@ $newPath = "$oldPath;C:\Program Files\qemu\"
 
 - QEMU boot PowerShell script
     - This will set QEMU up so that you can drawterm into your 9front system
+    - I'm forwarding a lot of ports here. 😅 I kept adding ports until it worked. We probably don't need to forward this many though.
     
     `boot-drawterm.ps1`
     
@@ -91,6 +100,7 @@ $newPath = "$oldPath;C:\Program Files\qemu\"
     - Run this each time after boot
     - Instructions came from here:
         - https://bsandro.tech/posts/9front-on-qemu-with-drawterm-on-linux/
+    - The commented lines are from an older tutorial.
     
     ```
     #!/bin/rc
