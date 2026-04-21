@@ -63,32 +63,54 @@
     User's email address: 
     Sponsor's email address: 
     user glenda installed for Plan 9
-    
-    term% echo 'key user=glenda dom=drawterm.test proto=p9sk1 !password=cleartext' > /mnt/factotum/ctl
-    
-    term% aux/listen1 -t 'tcp!*!ticket' /bin/auth/authsrv &
-    
-    term% service=cpu aux/listen1 'tcp!*!ncpu' /bin/cpu -R &
     ```
     
-- Script to receive drawterm connections
-    - Run this each time after boot
-    - Instructions came from here:
-        - https://bsandro.tech/posts/9front-on-qemu-with-drawterm-on-linux/
-    
-    ```
-    #!/bin/rc
-    
-    auth/keyfs -p $home/lib/keys
-    
-    echo 'key user=glenda dom=drawterm.test proto=p9sk1 !password=cleartext' > /mnt/factotum/ctl
-    
-    # aux/listen1 -t 'tcp!*!ticket' /bin/auth/authsrv &
-    
-    # service=cpu aux/listen1 'tcp!*!ncpu' /bin/cpu -R &
-    
-    aux/listen1 -t 'tcp!*!rcpu' /rc/bin/service/tcp17019
-    ```
+# Setup system to receive drawterm connections
+
+On the QEMU console, edit `plan9.ini`:
+
+```
+9fs 9fat
+cd /n/9fat
+acme # edit plan9.ini
+``
+
+Here's `plan9.ini`:
+
+```
+bootfile=9pc64
+bootargs=local!/dev/sd00/fscache 
+#mouseport=ps2intellimouse
+mouseport=ps2
+monitor=vesa
+vgasize=1024x768x16
+
+tiltscreen=none
+service=cpu
+nvram=#S/sd00/nvram
+```
+
+## Run `auth/wrkey`
+
+```
+auth/wrkey
+authid: glenda
+authdom: 9front
+secstore key: LEAVE BLANK
+password: GLENDA'S PASSWORD
+confirm password:
+enable legacy p9sk1[no]:
+```
+
+Reboot the system:
+
+```
+fshalt -r
+```
+
+You might have to scroll down in the window so that `fshalt` doesn't hang if its output gets to the end of the window.
+
+# Get drawterm for Windows
     
 - Download drawterm for Windows
     - http://drawterm.9front.org/
