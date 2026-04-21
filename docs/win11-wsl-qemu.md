@@ -42,11 +42,10 @@
         -net user,hostfwd=tcp:127.0.0.1:17019-:17019,hostfwd=tcp:127.0.0.1:17564-:564,hostfwd=tcp:127.0.0.1:17010-:17010,hostfwd=tcp:127.0.0.1:17567-:567,hostfwd=tcp:127.0.0.1:17020-:17020
     ```
     
-- Setup system to receive drawterm connections
-    - Run this only once
-    - Instructions came from here:
-        - https://9p.io/wiki/plan9/Drawterm_to_your_terminal/index.html
-    
+# Setup system to receive drawterm connections
+
+## `auth/keyfs`
+
     ```
     term% auth/keyfs -p $home/lib/keys
     Password: 
@@ -64,8 +63,6 @@
     Sponsor's email address: 
     user glenda installed for Plan 9
     ```
-    
-# Setup system to receive drawterm connections
 
 On the QEMU console, edit `plan9.ini`:
 
