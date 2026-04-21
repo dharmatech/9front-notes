@@ -64,6 +64,8 @@
     user glenda installed for Plan 9
     ```
 
+## `plan9.ini`
+
 On the QEMU console, edit `plan9.ini`:
 
 ```
