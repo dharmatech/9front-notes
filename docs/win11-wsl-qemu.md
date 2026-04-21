@@ -39,30 +39,30 @@
         -device virtio-scsi-pci,id=scsi \
         -drive if=none,id=vd0,file=9front.qcow2.img \
         -device scsi-hd,drive=vd0 \
-        -net user,hostfwd=tcp:127.0.0.1:17019-:17019,hostfwd=tcp:127.0.0.1:17564-:564,hostfwd=tcp:127.0.0.1:17010-:17010,hostfwd=tcp:127.0.0.1:17567-:567,hostfwd=tcp:127.0.0.1:17020-:17020
+        -net user,hostfwd=tcp:127.0.0.1:17019-:17019,hostfwd=tcp:127.0.0.1:17564-:564,hostfwd=tcp:127.0.0.1:17010-:17010,hostfwd=tcp:127.0.0.1:17567-:567,hostfwd=tcp:127.0.0.1:17020-:17020,hostfwd=tcp:127.0.0.1:17021-:17021
     ```
     
 # Setup system to receive drawterm connections
 
 ## `auth/keyfs`
 
-    ```
-    term% auth/keyfs -p $home/lib/keys
-    Password: 
-    0 keys read in DES format
-    
-    term% auth/changeuser -p glenda
-    Password: 
-    Confirm password: 
-    assign new Inferno/POP secret? [y/n]: n
-    Expiration date (YYYYMMDD or never)[never]: 
-    Post id: 
-    User's full name: 
-    Department #: 
-    User's email address: 
-    Sponsor's email address: 
-    user glenda installed for Plan 9
-    ```
+```
+term% auth/keyfs -p $home/lib/keys
+Password: 
+0 keys read in DES format
+
+term% auth/changeuser -p glenda
+Password: 
+Confirm password: 
+assign new Inferno/POP secret? [y/n]: n
+Expiration date (YYYYMMDD or never)[never]: 
+Post id: 
+User's full name: 
+Department #: 
+User's email address: 
+Sponsor's email address: 
+user glenda installed for Plan 9
+```
 
 ## `plan9.ini`
 
@@ -72,7 +72,7 @@ On the QEMU console, edit `plan9.ini`:
 9fs 9fat
 cd /n/9fat
 acme # edit plan9.ini
-``
+```
 
 Here's `plan9.ini`:
 
@@ -124,12 +124,12 @@ Use `exportfs` to export `/usr/glenda`.\
 Run this on Plan 9:
 
 ```
-aux/listen1 -t tcp!*!17020 /bin/exportfs -r /usr/glenda
+aux/listen1 -t tcp!*!17021 /bin/exportfs -r /usr/glenda
 ```
 
 On Linux:
 
 ```
 mkdir -p /tmp/9front-glenda
-/home/dharmatech/src/plan9port/bin/9pfuse 'tcp!127.0.0.1!17020' /tmp/9front-glenda
+/home/dharmatech/src/plan9port/bin/9pfuse 'tcp!127.0.0.1!17021' /tmp/9front-glenda
 ```
