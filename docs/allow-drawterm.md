@@ -1,4 +1,6 @@
 
+#### Allowing glenda to drawterm in
+
 Run these steps after 9front has been installed.
 
 This assumes you installed 9front in QEMU as described in [install-9front-qemu.md](install-9front-qemu/install-9front-qemu.md).
