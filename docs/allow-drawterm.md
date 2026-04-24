@@ -48,3 +48,17 @@ Reboot:
 ```
 fshalt -r
 ```
+
+#### drawterm in
+
+From Windows:
+
+```
+.\drawterm-amd64.exe -h 127.0.0.1 -a 127.0.0.1 -u glenda -c "plumber; rio"
+```
+
+From Linux:
+
+```
+drawterm -h 127.0.0.1 -u glenda -a 127.0.0.1 -c 'plumber; rio'
+```
