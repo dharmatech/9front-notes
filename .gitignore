@@ -1,0 +1,10 @@
+# qemu/linux/9front-11554.amd64.iso.gz
+9front*.iso*
+
+*.img
+
+# qemu/linux/snapshots/9front.qcow2.img-fresh-install
+qemu/linux/snapshots/*.img*
+
+# qemu/linux/9front.qcow2.img-drawterm
+9front*.img*
