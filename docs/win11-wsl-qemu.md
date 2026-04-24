@@ -39,56 +39,77 @@
         -device virtio-scsi-pci,id=scsi \
         -drive if=none,id=vd0,file=9front.qcow2.img \
         -device scsi-hd,drive=vd0 \
-        -net user,hostfwd=tcp:127.0.0.1:17019-:17019,hostfwd=tcp:127.0.0.1:17564-:564,hostfwd=tcp:127.0.0.1:17010-:17010,hostfwd=tcp:127.0.0.1:17567-:567,hostfwd=tcp:127.0.0.1:17020-:17020
+        -net user,hostfwd=tcp:127.0.0.1:17019-:17019,hostfwd=tcp:127.0.0.1:17564-:564,hostfwd=tcp:127.0.0.1:17010-:17010,hostfwd=tcp:127.0.0.1:17567-:567,hostfwd=tcp:127.0.0.1:17020-:17020,hostfwd=tcp:127.0.0.1:17021-:17021
     ```
     
-- Setup system to receive drawterm connections
-    - Run this only once
-    - Instructions came from here:
-        - https://9p.io/wiki/plan9/Drawterm_to_your_terminal/index.html
-    
-    ```
-    term% auth/keyfs -p $home/lib/keys
-    Password: 
-    0 keys read in DES format
-    
-    term% auth/changeuser -p glenda
-    Password: 
-    Confirm password: 
-    assign new Inferno/POP secret? [y/n]: n
-    Expiration date (YYYYMMDD or never)[never]: 
-    Post id: 
-    User's full name: 
-    Department #: 
-    User's email address: 
-    Sponsor's email address: 
-    user glenda installed for Plan 9
-    
-    term% echo 'key user=glenda dom=drawterm.test proto=p9sk1 !password=cleartext' > /mnt/factotum/ctl
-    
-    term% aux/listen1 -t 'tcp!*!ticket' /bin/auth/authsrv &
-    
-    term% service=cpu aux/listen1 'tcp!*!ncpu' /bin/cpu -R &
-    ```
-    
-- Script to receive drawterm connections
-    - Run this each time after boot
-    - Instructions came from here:
-        - https://bsandro.tech/posts/9front-on-qemu-with-drawterm-on-linux/
-    
-    ```
-    #!/bin/rc
-    
-    auth/keyfs -p $home/lib/keys
-    
-    echo 'key user=glenda dom=drawterm.test proto=p9sk1 !password=cleartext' > /mnt/factotum/ctl
-    
-    # aux/listen1 -t 'tcp!*!ticket' /bin/auth/authsrv &
-    
-    # service=cpu aux/listen1 'tcp!*!ncpu' /bin/cpu -R &
-    
-    aux/listen1 -t 'tcp!*!rcpu' /rc/bin/service/tcp17019
-    ```
+# Setup system to receive drawterm connections
+
+## `auth/keyfs`
+
+```
+term% auth/keyfs -p $home/lib/keys
+Password: 
+0 keys read in DES format
+
+term% auth/changeuser -p glenda
+Password: 
+Confirm password: 
+assign new Inferno/POP secret? [y/n]: n
+Expiration date (YYYYMMDD or never)[never]: 
+Post id: 
+User's full name: 
+Department #: 
+User's email address: 
+Sponsor's email address: 
+user glenda installed for Plan 9
+```
+
+## `plan9.ini`
+
+On the QEMU console, edit `plan9.ini`:
+
+```
+9fs 9fat
+cd /n/9fat
+acme # edit plan9.ini
+```
+
+Here's `plan9.ini`:
+
+```
+bootfile=9pc64
+bootargs=local!/dev/sd00/fscache 
+#mouseport=ps2intellimouse
+mouseport=ps2
+monitor=vesa
+vgasize=1024x768x16
+
+tiltscreen=none
+service=cpu
+nvram=#S/sd00/nvram
+```
+
+## Run `auth/wrkey`
+
+```
+auth/wrkey
+authid: glenda
+authdom: 9front
+secstore key: LEAVE BLANK
+password: GLENDA'S PASSWORD
+confirm password:
+enable legacy p9sk1[no]:
+```
+
+Reboot the system:
+
+```
+fshalt -r
+```
+
+You might have to scroll down in the window so that `fshalt` doesn't hang if its output gets to the end of the window.
+
+# Get drawterm for Windows
     
 - Download drawterm for Windows
     - http://drawterm.9front.org/
@@ -103,12 +124,12 @@ Use `exportfs` to export `/usr/glenda`.\
 Run this on Plan 9:
 
 ```
-aux/listen1 -t tcp!*!17020 /bin/exportfs -r /usr/glenda
+aux/listen1 -t tcp!*!17021 /bin/exportfs -r /usr/glenda
 ```
 
 On Linux:
 
 ```
 mkdir -p /tmp/9front-glenda
-/home/dharmatech/src/plan9port/bin/9pfuse 'tcp!127.0.0.1!17020' /tmp/9front-glenda
+/home/dharmatech/src/plan9port/bin/9pfuse 'tcp!127.0.0.1!17021' /tmp/9front-glenda
 ```
