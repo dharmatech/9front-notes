@@ -1,3 +1,9 @@
+
+#### Setting up auth 
+
+If you want users other than `glenda` to be able to drawterm in,
+these are the instructions to follow.
+
 Perform all steps in [allow-drawterm.md](allow-drawterm.md) 
 
 Boot system.
