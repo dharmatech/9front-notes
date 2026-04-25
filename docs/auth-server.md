@@ -124,3 +124,6 @@ Next time you drawterm in as `dennis`, you can specify `rio` as the startup comm
 .\drawterm-amd64.exe -h 127.0.0.1 -a tcp!127.0.0.1!17567 -u dennis -c "plumber; rio"
 ```
 
+If the drawterm login process seems delayed, see this issue:
+
+https://github.com/dharmatech/9front-notes/issues/3
