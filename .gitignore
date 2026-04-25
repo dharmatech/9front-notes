@@ -8,3 +8,6 @@ qemu/linux/snapshots/*.img*
 
 # qemu/linux/9front.qcow2.img-drawterm
 9front*.img*
+
+# docs/archive/win11-qemu-9front-drawterm.md
+archive
