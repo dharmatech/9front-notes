@@ -1,5 +1,5 @@
 
-#### Setting up auth 
+### Setting up auth 
 
 If you want users other than `glenda` to be able to drawterm in,
 these are the instructions to follow.
@@ -83,4 +83,37 @@ User's full name:
 Department #: 
 User's email address: 
 Sponsor's email address: 
+```
+
+### Adding user `dennis`
+
+Add user `dennis`:
+
+```
+echo newuser dennis >>/srv/cwfs.cmd
+```
+
+Check if `dennis` shows up in `/adm/users`:
+
+```
+cat /adm/users 
+```
+
+Run `changeuser`:
+
+```
+auth/keyfs
+auth/changeuser dennis
+```
+
+Drawterm in as `dennis`. But, to not supply a command to run:
+
+```
+.\drawterm-amd64.exe -h 127.0.0.1 -a tcp!127.0.0.1!17567 -u dennis
+```
+
+
+
+```
+/sys/lib/newuser
 ```
