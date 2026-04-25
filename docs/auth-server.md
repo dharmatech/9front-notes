@@ -106,14 +106,21 @@ auth/keyfs
 auth/changeuser dennis
 ```
 
-Drawterm in as `dennis`. But, to not supply a command to run:
+Drawterm in as `dennis`. But, do not supply a command to run:
 
 ```
 .\drawterm-amd64.exe -h 127.0.0.1 -a tcp!127.0.0.1!17567 -u dennis
 ```
 
-
+At the `cirno#` prompt, run:
 
 ```
 /sys/lib/newuser
 ```
+
+Next time you drawterm in as `dennis`, you can specify `rio` as the startup command:
+
+```
+.\drawterm-amd64.exe -h 127.0.0.1 -a tcp!127.0.0.1!17567 -u dennis -c "plumber; rio"
+```
+
