@@ -62,3 +62,7 @@ From Linux:
 ```
 drawterm -h 127.0.0.1 -u glenda -a 127.0.0.1 -c 'plumber; rio'
 ```
+
+#### References
+
+See [FQA 7 - System Management](https://fqa.9front.org/fqa7.html) for detailed documentation about this.
