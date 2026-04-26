@@ -127,3 +127,7 @@ Next time you drawterm in as `dennis`, you can specify `rio` as the startup comm
 If the drawterm login process seems delayed, see this issue:
 
 https://github.com/dharmatech/9front-notes/issues/3
+
+#### References
+
+See [FQA 7 - System Management](https://fqa.9front.org/fqa7.html) for detailed documentation about these topics.
